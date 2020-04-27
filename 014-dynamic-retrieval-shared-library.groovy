@@ -9,4 +9,4 @@ library (
         )
 )
 
-buildJavaAppDockerFull(microserviceName: "example-app")
+buildJavaAppDockerFull(repo: "jenkins-pipelines", microserviceName: "example-app")
