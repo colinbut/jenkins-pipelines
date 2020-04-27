@@ -1,3 +1,3 @@
 @Library("my-shared-library") _
 
-buildJavaAppDockerFull(microserviceName: "example-app")
+buildJavaAppDockerFull(repo: "jenkins-pipelines", microserviceName: "example-app")
