@@ -1,0 +1,23 @@
+# Server props
+server:
+  port: 8080
+
+# Server Monitoring props
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Database props
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:exampledb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
