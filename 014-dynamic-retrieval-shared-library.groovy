@@ -4,7 +4,7 @@ library (
                 [
                         $class: 'GitSCMSource',
                         remote: 'https://github.com/colinbut/jenkins-shared-library.git',
-                        credentials: 'github_credentials'
+                        credentialsId: 'github_credentials'
                 ]
         )
 )
