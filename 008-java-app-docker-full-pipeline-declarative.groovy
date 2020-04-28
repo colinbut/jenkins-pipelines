@@ -38,7 +38,7 @@ pipeline {
             }
             steps {
                 echo "Building a Docker image..."
-                sh ('docker build -t example-app:${COMMIT_ID} .')
+                sh ('docker build -t 066203203749.dkr.ecr.eu-west-2.amazonaws.com/example-app:${COMMIT_ID} .')
             }
         }
         stage ('Publish Docker image') {
@@ -46,7 +46,7 @@ pipeline {
                 script {
                     // uses Docker Jenkins Plugin
                     docker.withRegistry('https://066203203749.dkr.ecr.eu-west-2.amazonaws.com', 'ecr:eu-west-2:AWS_CREDENTIALS') {
-                        docker.image('example-app:${COMMIT_ID}').push()
+                        docker.image('066203203749.dkr.ecr.eu-west-2.amazonaws.com/example-app:${COMMIT_ID}').push()
                     }
                 }
             }
