@@ -1,3 +1,3 @@
-library 'my-shared-library-test-version@master'
+library 'my-shared-library-allow-override@master'
 
 buildJavaAppDockerFull(repo: "jenkins-pipelines", microserviceName: "example-app")
