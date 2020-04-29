@@ -145,6 +145,16 @@ node {
                 }
             }
 
+            stage('Deployment') {
+                if (env.BRANCH_NAME == 'master') {
+                    def userInput = input(id: 'deploy', message: 'Proceed with Deployment?')
+                    echo "${userInput}"
+                    if ("${userInput}" == "Yes") {
+                        echo "Deploying to Prod"
+                    }
+                }
+            }
+
         }
     }
 }
