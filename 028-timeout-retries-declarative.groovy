@@ -26,8 +26,8 @@ pipeline {
             }
         }
         stage("Package") {
-            timeout(time: 1, unit: "MINUTES") {
-                steps {
+            steps {
+                timeout(time: 1, unit: "MINUTES") {
                     sh "mvn package -DskipTests=true"
                 }
             }
