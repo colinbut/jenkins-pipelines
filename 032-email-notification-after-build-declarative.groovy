@@ -48,8 +48,5 @@ pipeline {
         success {
             echo "The build ${env.JOB_NAME} #${env.BUILD_NUMBER} has successfully been built"
         }
-        cleanup {
-            echo "Cleaning up build: ${env.BUILD_URL}"
-        }
     }
 }
