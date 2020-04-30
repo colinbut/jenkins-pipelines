@@ -10,7 +10,6 @@ node {
         sh "${maven}/bin/mvn clean compile"
     }
     stage("Unit Tests") {
-
         sh "${maven}/bin/mvn test"
     }
     stage("Integration Tests") {
