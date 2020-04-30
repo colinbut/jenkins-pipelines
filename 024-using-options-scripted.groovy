@@ -2,6 +2,9 @@
 node {
     timestamps {
         ansiColor("xterm") {
+            stage("Checkout"){
+                git credentialsId: "github_credentials", url: "https://github.com/colinbut/jenkins-pipelines.git"
+            }
             stage("Compile") {
                 timeout(time: 1, unit: "MINUTES") {
                     sh "mvn clean compile"
