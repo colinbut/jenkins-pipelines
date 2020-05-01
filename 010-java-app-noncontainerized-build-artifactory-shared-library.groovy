@@ -1,6 +1,6 @@
 @Library("my-shared-library") _
 
-buildJavaAppPipeline()
+buildJavaAppPipeline(repo: "jenkins-pipelines")
         .compile(command: "./mvnw clean compile")
         .unitTests(command: "./mvnw test")
         .integrationTests(command: "./mvnw test")
