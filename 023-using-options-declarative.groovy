@@ -4,6 +4,11 @@ pipeline {
     options {
         timestamps()
         ansiColor("xterm") //requires AnsiColor Plugin
+        skipStagesAfterUnstable()
+        preserveStashes(buildCount: 5)
+        disableConcurrentBuilds()
+        disableResume()
+        buildDiscarder(logRotator(numToKeepStr: '1'))
     }
     stages {
         stage("Compile") {
