@@ -2,6 +2,7 @@
 node {
 
     def DOCKER_REGISTRY = "066203203749.dkr.ecr.eu-west-2.amazonaws.com"
+    def NEXUS_URL = "3.8.234.107:8081"
     def DOCKER_REGISTRY_URL = "https://${DOCKER_REGISTRY}"
     def DOCKER_USER = "AWS"
     def AWS_REGION = "eu-west-2"
@@ -64,7 +65,7 @@ node {
                         )
 
                         rtMavenRun(
-                                tool: "Maven 3.6.0", // using Maven configured under Jenkins Global Tools
+                                tool: "apache-maven-3.6.3", // using Maven configured under Jenkins Global Tools
                                 pom: "pom.xml",
                                 goals: "clean install -DskipTests=true",
                                 resolverId: 'resolver-unique-id',
@@ -87,13 +88,13 @@ node {
                             if (artifactExists) {
                                 // requires the Nexus Artifact Uploader Jenkins Plugin installed
                                 nexusArtifactUploader(
-                                        nexusVersion: NEXUS_VERSION,
-                                        protocol: NEXUS_PROTOCOL,
+                                        nexusVersion: "nexus3",
+                                        protocol: "http",
                                         nexusUrl: NEXUS_URL,
                                         groupId: pom.groupId,
                                         version: pom.version,
-                                        repository: NEXUS_REPOSITORY,
-                                        credentialsId: NEXUS_CREDENTIALS_ID,
+                                        repository: "${params.MICROSERVICE_NAME}",
+                                        credentialsId: "nexus_credentials",
                                         artifacts: [
                                                 [artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging],
                                                 [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
@@ -145,12 +146,25 @@ node {
                 }
             }
 
-            stage('Deployment') {
+            stage('Deploy to Prod') {
                 if (env.BRANCH_NAME == 'master') {
-                    def userInput = input(id: 'deploy', message: 'Proceed with Deployment?')
+                    def userInput = input(
+                            id: 'deploy',
+                            message: 'Proceed with Deployment?',
+                            parameters: [
+                                    [
+                                            $class: 'ChoiceParameterDefinition',
+                                            choices: ["Yes", "No"].join("\n"),
+                                            name: "input",
+                                            description: "Select Box Option - Menu"
+                                    ]
+                            ]
+                    )
                     echo "${userInput}"
                     if ("${userInput}" == "Yes") {
                         echo "Deploying to Prod"
+                    } else {
+                        echo "Build finished"
                     }
                 }
             }
