@@ -115,7 +115,7 @@ node {
             if (env.BRANCH_NAME == 'master') {
                 if ("${params.BUILD_DOCKER_IMAGE}" == 'true') {
                     def COMMIT_ID = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                    def DOCKER_TAG = "${DOCKER_REGISTRY_URL}/${params.MICROSERVICE_NAME}:${COMMIT_ID}"
+                    def DOCKER_TAG = "${DOCKER_REGISTRY}/${params.MICROSERVICE_NAME}:${COMMIT_ID}"
 
                     stage("Build Docker Image") {
                         echo "Building a Docker image..."
