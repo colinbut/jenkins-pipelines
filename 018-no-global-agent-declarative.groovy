@@ -6,7 +6,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                    label 'my-own-label'
                     args '-v /tmp:/tmp'
                 }
             }
@@ -18,7 +17,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.6.3-openjdk-8-slim'
-                    label 'my-own-label'
                     args '-v /tmp:/tmp'
                 }
             }
@@ -30,7 +28,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.6.3-openjdk-8'
-                    label 'my-own-label'
                     args '-v /tmp:/tmp'
                 }
             }
@@ -42,7 +39,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                    label 'my-own-label'
                     args '-v /tmp:/tmp'
                 }
             }
