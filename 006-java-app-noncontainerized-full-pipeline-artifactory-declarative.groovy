@@ -50,7 +50,7 @@ pipeline {
                 )
 
                 rtMavenRun(
-                        tool: "Maven 3.6.0", // using Maven configured under Jenkins Global Tools
+                        tool: "apache-maven-3.6.3", // using Maven configured under Jenkins Global Tools
                         pom: "pom.xml",
                         goals: "clean install -DskipTests=true",
                         resolverId: 'resolver-unique-id',
