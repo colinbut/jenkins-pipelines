@@ -48,7 +48,7 @@ node {
 
             stage("Publish Jar Artifacts") {
                 if (env.BRANCH_NAME == 'master') {
-                    if (${params.PUBLISH_ARTIFACTORY} == 'true') {
+                    if ("${params.PUBLISH_ARTIFACTORY}" == 'true') {
                         rtBuildInfo(captureEnv: true)
 
                         rtMavenResolver (
