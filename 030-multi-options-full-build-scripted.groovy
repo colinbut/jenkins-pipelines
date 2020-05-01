@@ -12,6 +12,7 @@ node {
                     parameters(
                             [
                                     string(name: 'MICROSERVICE_NAME', description: 'Name of the Microservice to build'),
+                                    booleanParam(defaultValue: false, name: 'STATIC_CODE_ANALYSIS', description: 'Analyze code using SonarQube?'),
                                     booleanParam(defaultValue: false, name: 'PUBLISH_NEXUS', description: 'Publish to Nexus?'),
                                     booleanParam(defaultValue: false, name: 'PUBLISH_ARTIFACTORY', description: 'Publish to Artifactory?'),
                                     booleanParam(defaultValue: false, name: 'BUILD_DOCKER_IMAGE', description: 'Build Docker Image?'),
@@ -44,6 +45,15 @@ node {
 
             stage("Package") {
                 sh "${maven}/bin/mvn package -DskipTests=true"
+            }
+
+            stage('Static Code Analysis') {
+                if ("${params.STATIC_CODE_ANALYSIS}" == 'true') {
+                    echo "Analysing code with SonarQube"
+                    withSonarQubeEnv(credentialsId: 'sonarqube-credentials', installationName: 'MySonarQubeServer') {
+                        sh './mvnw sonar:sonar'
+                    }
+                }
             }
 
             stage("Publish Jar Artifacts") {
