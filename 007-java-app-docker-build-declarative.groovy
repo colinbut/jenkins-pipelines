@@ -36,7 +36,8 @@ pipeline {
                 script {
                     // uses Docker Jenkins Plugin
                     docker.withRegistry('https://066203203749.dkr.ecr.eu-west-2.amazonaws.com', 'ecr:eu-west-2:AWS_CREDENTIALS') {
-                        docker.image('066203203749.dkr.ecr.eu-west-2.amazonaws.com/example-app:${COMMIT_ID}').push()
+                        def COMMIT_ID = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                        docker.image("066203203749.dkr.ecr.eu-west-2.amazonaws.com/example-app:${COMMIT_ID}").push()
                     }
                 }
             }
