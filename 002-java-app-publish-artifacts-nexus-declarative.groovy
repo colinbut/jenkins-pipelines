@@ -4,9 +4,9 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "35.179.15.243:8081"           // Change URL to URL of your Nexus running instance
-        NEXUS_REPOSITORY = "repository-example"    // ensure artifact repository exists in Nexus
-        NEXUS_CREDENTIALS_ID = "nexus-credentials" // setup Nexus Credentials in Jenkins Credentials
+        NEXUS_URL = "3.8.234.107:8081"           // Change URL to URL of your Nexus running instance
+        NEXUS_REPOSITORY = "example-app"    // ensure artifact repository exists in Nexus
+        NEXUS_CREDENTIALS_ID = "nexus_credentials" // setup Nexus Credentials in Jenkins Credentials
     }
     stages {
         stage("Compile") {
